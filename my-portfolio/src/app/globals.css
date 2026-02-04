@@ -1,26 +1,52 @@
+/* globals.css */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #fdfdfd;
+    font-family: "Noto Sans KR", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    text-decoration: none !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Masonry 설정 */
+.my-masonry-grid {
+  display: flex;
+  margin-left: -20px;
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 20px;
+  background-clip: padding-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 아래쪽으로 갈수록 벌어지는 현상 방지 */
+}
+
+/* 이미지 효과: 언호버 시 다시 흑백으로 돌아오도록 본체에 transition 부여 */
+.photo-item-img {
+  filter: grayscale(45%); /* 기본 흑백 */
+  transition:
+    filter 0.4s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: filter, transform;
+}
+
+/* 호버 시 컬러로 변경 */
+.group:hover .photo-item-img {
+  filter: grayscale(0%);
+}
+
+.detail-photo-img {
+  transition:
+    filter 0.6s ease,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
